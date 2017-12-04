@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<html lang="en">
+<head>
+</head>
+<body>
+{% for tweet_json in tweets %}
+    <pre> {{ tweet_json}}</pre>
+
+{% endfor %}
+</body>
+</html>
+{% endblock %}

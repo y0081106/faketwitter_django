@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{# load flags templatetag in the top of your file #}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Fake Tweet Prediction</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .img-responsive {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+    </style>
+  <!-- http://flag-icon-css.lip.is -->
+  <link rel="stylesheet" href="{% static "flag-icon/css/flag-icon.min.css" %}">
+
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <form id="my_form" class="form-horizontal"  method="post" class="no-spinners">
+
+          <div class="form-group" style="margin-top: 50px">
+            {% csrf_token %}
+            <label  for="{{form.tweet.id_for_label}}">Please enter Tweet ID</label>
+            {{form.tweet_ids}}
+            {{form.tweet.errors}}
+
+          </div>
+
+        <div id="content">
+          <div class="form-group" >
+            <button id="tweet" type="submit" class="btn btn-primary">Predict</button>
+
+
+          </div>
+		  <div>
+		  <p>Demo : 867116376745533441, 810928631908339714</p>
+		  </div>
+          <div>
+              {% if tweet_id %}
+                  <h3>Tweet ID :</h3><p> {{ tweet_id }}</p>
+                  <h3>Image :</h3><img class="img-responsive" src={{ media_url }} class="img-rounded" alt="image">
+                  <h3>Tweet Text:</h3><p>{{ tweet_text }}</p>
+              {% endif %}
+          </div>
+        <div id="output"></div>
+        <div id ="get-val">
+            {% if tweet_id %}
+            <h3>Final Prediction :</h3><p>{{ retraining }}</p>
+            {% endif %}
+        </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div><!-- /container -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  </body>
+</html>
+{% endblock %}
+
